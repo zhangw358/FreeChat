@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Clearwhite">#fff</color>
+    <color name="list_background">#303030</color>
+    <color name="Skyblue">#00bfff</color>
+    <color name="Red">#992416</color>
+    <color name="Black">#272727</color>
+    <color name="Grey">#626262</color>
+    <color name="White">#c5c4c4</color>
+</resources>
