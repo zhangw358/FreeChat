@@ -10,7 +10,8 @@ import android.widget.Button;
 public class FCLoginActivity extends Activity {
 
 
-    protected Button regButton;
+    private Button regButton;
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,15 @@ public class FCLoginActivity extends Activity {
         getActionBar().setDisplayShowHomeEnabled(false);
         getActionBar().setDisplayShowTitleEnabled(false);
         regButton = (Button) findViewById(R.id.bt_goto_reg);
+        loginButton = (Button) findViewById(R.id.bt_login);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FCLoginActivity.this, FCMainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,5 +37,8 @@ public class FCLoginActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+
     }
+
 }

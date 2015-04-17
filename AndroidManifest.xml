@@ -32,6 +32,12 @@
             android:name=".FCActionBarActivity"
             android:label="@string/title_activity_fcaction_bar" >
         </activity>
+        
+         <activity
+            android:name=".FCMainActivity"
+            android:label="@string/title_activity_fcmain" >
+        </activity>
+        
     </application>
 
 </manifest>
