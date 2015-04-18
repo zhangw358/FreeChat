@@ -2,6 +2,7 @@
 <resources>
     <color name="Clearwhite">#fff</color>
     <color name="list_background">#303030</color>
+    <color name="clearcolor">#00000000</color>
     <color name="Skyblue">#00bfff</color>
     <color name="Red">#992416</color>
     <color name="Black">#272727</color>

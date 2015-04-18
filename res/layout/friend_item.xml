@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/fc_rounded_rectangle_background"
+    android:orientation="horizontal" >
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <!-- 定义一个ImageView，用于作为列表项的一部分。 -->
+
+    <ImageView
+        android:id="@+id/img_header"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher"
+        android:layout_margin="3dp" />
 
     <TextView
         android:id="@+id/tv_friend_name"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="15dp"
-        android:text="@string/hello_world"
-        android:background="@drawable/send_bubble"
-        android:textSize="35sp"
-        />
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/img_header"
+        android:layout_toRightOf="@+id/img_header"
+        android:gravity="left"
+        android:layout_marginLeft="3dp"
+        android:maxLines="1"
+        android:textColor="@color/Grey"
+        android:textSize="20sp" />
 
 
-
-</LinearLayout>
+</RelativeLayout>
