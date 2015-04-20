@@ -1,4 +1,4 @@
-package com.example.freechat.ui;
+package com.example.freechat.ui.activity;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +13,9 @@ import java.util.List;
 
 import com.example.freechat.R;
 import com.example.freechat.network.*;
+import com.example.freechat.ui.FCActionBarActivity;
+import com.example.freechat.ui.FCMessage;
+import com.example.freechat.ui.FCMessageAdapter;
 
 public class FCChatActivity extends FCActionBarActivity {
 
