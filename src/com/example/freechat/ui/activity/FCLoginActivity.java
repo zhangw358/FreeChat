@@ -1,4 +1,4 @@
-package com.example.freechat.ui;
+package com.example.freechat.ui.activity;
 
 import com.example.freechat.R;
 

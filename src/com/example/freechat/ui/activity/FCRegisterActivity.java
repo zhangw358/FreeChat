@@ -1,8 +1,8 @@
-package com.example.freechat.ui;
+package com.example.freechat.ui.activity;
 
 import com.example.freechat.R;
+import com.example.freechat.ui.FCActionBarActivity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
