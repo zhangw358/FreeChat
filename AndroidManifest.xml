@@ -4,14 +4,21 @@
     <uses-sdk 
         android:minSdkVersion="15"
         android:targetSdkVersion="20" />
-
+	
+        <!-- Internet Access -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".FCLoginActivity"
+            android:name="com.example.freechat.ui.FCLoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,22 +27,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FCRegisterActivity"
+   			android:name = "com.example.freechat.ui.FCRegisterActivity"
             android:label="@string/title_activity_register" >
         </activity>
         <activity
-            android:name=".FCChatActivity"
-            android:label="@string/title_activity_chat" >
-            
+   			android:name = "com.example.freechat.ui.FCChatActivity"
+            android:label="@string/title_activity_chat" >          
         </activity>
         <activity
-            android:name=".FCActionBarActivity"
+   			android:name = "com.example.freechat.ui.FCActionBarActivity"
             android:label="@string/title_activity_fcaction_bar" >
         </activity>
         
-         <activity
-            android:name=".FCMainActivity"
-            android:label="@string/title_activity_fcmain" >
+        <activity
+            android:name= "com.example.freechat.ui.FCMainActivity"
+            android:label="@string/title_activity_fcmain"  >
         </activity>
         
     </application>

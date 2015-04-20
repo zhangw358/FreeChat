@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.freechat.FCMainActivity">
+    tools:context="com.example.freechat.ui.FCMainActivity">
 
     <fragment
         android:id="@+id/fragment_friend"
-        android:name="com.example.freechat.FCFriendFragment"
+        android:name="com.example.freechat.ui.FCFriendFragment"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_above="@+id/rg_bottomGroup"
@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/fragment_session"
-        android:name="com.example.freechat.FCSessionFragment"
+        android:name="com.example.freechat.ui.FCSessionFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/rg_bottomGroup" />
