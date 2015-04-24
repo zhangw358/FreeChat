@@ -12,7 +12,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="new username"
+        android:hint="@string/hint_username"
         android:id="@+id/et_newusername"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -21,7 +21,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="new password"
+        android:hint="@string/hint_passwd"
         android:inputType="textPassword"
         android:id="@+id/et_newpassword"
         android:layout_below="@+id/et_newusername"
@@ -31,7 +31,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="confirm  pwd"
+        android:hint="@string/hint_passwd_confirm"
         android:inputType="textPassword"
         android:id="@+id/et_checkpassword"
         android:layout_below="@+id/et_newpassword"
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/fcbutton_style"
-        android:text="Sign up"
+        android:text="@string/sign_up"
         android:textColor="@color/Clearwhite"
         android:id="@+id/bt_reg"
         android:layout_below="@+id/et_checkpassword"
