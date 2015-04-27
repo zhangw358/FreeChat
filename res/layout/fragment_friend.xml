@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:listSelector="@color/clearcolor"
         android:dividerHeight="15dp"
+        android:scrollbars="none"
         android:divider="@color/clearcolor"
         android:id="@+id/lv_friend_list"
        	android:layout_marginTop="10dp"
