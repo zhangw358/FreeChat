@@ -1,6 +1,11 @@
 package com.example.freechat.ui.activity;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,8 +16,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.freechat.FCPushService;
 import com.example.freechat.R;
-import com.example.freechat.network.*;
+import com.example.freechat.aidl.AIDLChatActivity;
+import com.example.freechat.aidl.AIDLPushService;
 import com.example.freechat.ui.FCActionBarActivity;
 import com.example.freechat.ui.FCMessage;
 import com.example.freechat.ui.FCMessageAdapter;
@@ -25,20 +32,53 @@ public class FCChatActivity extends FCActionBarActivity {
     private EditText m_sendMessgeText;
     
     private FCMessageAdapter m_messageAdapter;
-    private List<FCMessage> m_messageList;
-    
-    private FCUDPReceiver m_UdpReceiver;
-    private FCUDPSender m_UdpSender;
-    private String m_IPAddress;
-    private int m_PORT = 6650;
+    private List<FCMessage> m_messageList;    
 
+    
+    private AIDLChatActivity.Stub mCallback = new AIDLChatActivity.Stub() {
+
+		@Override
+		public void onNewMessageReceived(String from, String to, int timeStamp,
+				String content) throws RemoteException {
+			
+		}
+
+		@Override
+		public void onMessageSendFinished(String from, String to,
+				int timeStamp, String content) throws RemoteException {
+			
+		}
+	};
+	
+	private AIDLPushService mPushService;
+
+	private ServiceConnection mConnection = new ServiceConnection() {
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			mPushService = null;
+		}
+
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+
+			mPushService = AIDLPushService.Stub.asInterface(service);
+
+			try {
+				mPushService.registerToPushService(mCallback);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+	};
+	
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         initUI();
         initChatList();
-        initNetwork();
+        bindMyPushService();
     }
 
     private void initUI() {
@@ -57,12 +97,11 @@ public class FCChatActivity extends FCActionBarActivity {
             @Override
             public void onClick(View v) {
             	String sendInfo = m_sendMessgeText.getText().toString();
+            	m_sendMessgeText.setText("");
                 m_messageList.add(new FCMessage(sendInfo, FCMessage.SEND_MESSAGE));
                 
                 m_messageAdapter.notifyDataSetChanged();
                 m_chatListView.setSelection(m_messageList.size()-1);
-                
-                m_UdpSender.send(sendInfo.getBytes());
             }
         });
     }
@@ -72,24 +111,6 @@ public class FCChatActivity extends FCActionBarActivity {
         m_messageAdapter = new FCMessageAdapter(this, m_messageList);
         m_chatListView.setAdapter(m_messageAdapter);
 
-    }
-
-    private void initNetwork() {
-    	m_IPAddress = FCNetwork.getIPv4Address();
-    	m_UdpSender = new FCUDPSender(m_IPAddress, m_PORT);
-    	m_UdpReceiver = new FCUDPReceiver(m_PORT);
-    	m_UdpReceiver.setCallback(new FCUDPReceiver.OnReceiveCallback() {
-			
-			@Override
-			public void onReceive(String ip, byte[] data) {
-				// TODO Auto-generated method stub
-				String getInfo = new String(data);
-				m_messageList.add(new FCMessage("get"+getInfo, FCMessage.RECEIVE_MESSAGE));
-				m_messageAdapter.notifyDataSetChanged();
-                m_chatListView.setSelection(m_messageList.size()-1);
-			}
-		});
-    	m_UdpReceiver.start();
     }
     
     @Override
@@ -114,4 +135,10 @@ public class FCChatActivity extends FCActionBarActivity {
 		}
         return super.onOptionsItemSelected(item);
     }
+    
+	private void bindMyPushService() {
+		Intent intent = new Intent(FCChatActivity.this, FCPushService.class);
+		bindService(intent, mConnection, BIND_AUTO_CREATE);
+		startService(intent);
+	}
 }

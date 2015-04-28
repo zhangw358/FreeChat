@@ -1,6 +1,6 @@
 package com.example.freechat.ui.activity;
 
-import com.example.freechat.ChatActivity;
+import com.example.freechat.FCTChatActivity;
 import com.example.freechat.R;
 
 import android.app.Activity;
@@ -41,14 +41,7 @@ public class FCLoginActivity extends Activity {
                 startActivity(intent);
             }
         });
-
-        test();
     }
     
-    private void test() {
-    	Intent intent = new Intent(FCLoginActivity.this, ChatActivity.class);
-    	startActivity(intent);
-    	finish();
-    }
 
 }
