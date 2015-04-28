@@ -1,5 +1,6 @@
 package com.example.freechat.ui.activity;
 
+import com.example.freechat.ChatActivity;
 import com.example.freechat.R;
 
 import android.app.Activity;
@@ -19,6 +20,7 @@ public class FCLoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        
         getActionBar().setDisplayShowHomeEnabled(false);
         getActionBar().setTitle("FreeChat");
         regButton = (Button) findViewById(R.id.bt_goto_reg);
@@ -40,7 +42,13 @@ public class FCLoginActivity extends Activity {
             }
         });
 
-
+        test();
+    }
+    
+    private void test() {
+    	Intent intent = new Intent(FCLoginActivity.this, ChatActivity.class);
+    	startActivity(intent);
+    	finish();
     }
 
 }
