@@ -23,8 +23,8 @@ public class FCRegisterProcess {
 	public FCRegisterProcess() {
 	}
 
-	public FCRegisterProcess(Activity activity, String username, String password,
-			String email) {
+	public FCRegisterProcess(Activity activity, String username,
+			String password, String email) {
 		m_mainActivity = activity;
 		m_params = new ArrayList<NameValuePair>();
 		m_params.add(new BasicNameValuePair("action", "register"));
@@ -40,7 +40,7 @@ public class FCRegisterProcess {
 		httpUtil.post(FCConfigure.SERVER_ADDR, m_params);
 	}
 
-	@SuppressLint("HandlerLeak") 
+	@SuppressLint("HandlerLeak")
 	private class RegisterHandler extends Handler {
 
 		@Override
@@ -49,11 +49,17 @@ public class FCRegisterProcess {
 			case FCHttpUtil.POST_SUCCESS:
 				Toast.makeText(m_mainActivity, "Successful", Toast.LENGTH_SHORT)
 						.show();
+				String result = msg.getData().getString("postResult");
+				Toast.makeText(m_mainActivity, result, Toast.LENGTH_SHORT)
+						.show();
 				break;
 
 			case FCHttpUtil.POST_FAILED:
 				Toast.makeText(m_mainActivity, "Failed", Toast.LENGTH_SHORT)
-				.show();
+						.show();
+				int statusCode = msg.getData().getInt("status code");
+				Toast.makeText(m_mainActivity, "status is " + statusCode,
+						Toast.LENGTH_SHORT).show();
 				break;
 
 			default:
