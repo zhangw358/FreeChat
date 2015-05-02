@@ -1,6 +1,5 @@
 package com.example.freechat.ui.activity;
 
-import com.example.freechat.FCTChatActivity;
 import com.example.freechat.R;
 
 import android.app.Activity;

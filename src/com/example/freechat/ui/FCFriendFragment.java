@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 public class FCFriendFragment extends Fragment {
 
-    private ListView m_FriendListView;
+    private ListView m_friendListView;
     private FCFriendAdapter m_adapter;
     private List<FCFriend> m_friendList;
 
@@ -28,6 +28,8 @@ public class FCFriendFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        
+       
     }
 
     @Override
@@ -36,31 +38,25 @@ public class FCFriendFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView =  inflater.inflate(R.layout.fragment_friend, container, false);
 
-        m_FriendListView = (ListView) rootView.findViewById(R.id.lv_friend_list);
+        initUI();
+        return rootView;
+    }
+
+    void initUI() {
+    	m_friendListView = (ListView) rootView.findViewById(R.id.lv_friend_list);
         m_friendList = new ArrayList<FCFriend>();
 
-
-        m_friendList.add(new FCFriend("Friend1", "123"));
-        m_friendList.add(new FCFriend("Friend2", "123"));
-        m_friendList.add(new FCFriend("Friend3", "123"));
-        m_friendList.add(new FCFriend("Friend4", "123"));
-        m_friendList.add(new FCFriend("Friend5", "123"));
-        m_friendList.add(new FCFriend("Friend6", "123"));
-
         m_adapter = new FCFriendAdapter(getActivity().getApplicationContext(), m_friendList);
-        m_FriendListView.setAdapter(m_adapter);
+        m_friendListView.setAdapter(m_adapter);
 
-        m_FriendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        m_friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), FCChatActivity.class);
                 startActivity(intent);
             }
         });
-        return rootView;
     }
-
-
 
     @Override
     public void onAttach(Activity activity) {
