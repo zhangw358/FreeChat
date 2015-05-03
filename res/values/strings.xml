@@ -9,6 +9,7 @@
     <string name="title_activity_fcaction_bar">FCActionBarActivity</string>
     <string name="send">send</string>
     <string name="pic">pic</string>
+    <string name="audio">aud</string>
     <string name="title_activity_fcmain">FCMainActivity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     

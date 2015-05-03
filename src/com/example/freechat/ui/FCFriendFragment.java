@@ -48,7 +48,9 @@ public class FCFriendFragment extends Fragment {
 
         m_adapter = new FCFriendAdapter(getActivity().getApplicationContext(), m_friendList);
         m_friendListView.setAdapter(m_adapter);
-
+        
+        m_friendList.add(new FCFriend("test1", "123"));
+        
         m_friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

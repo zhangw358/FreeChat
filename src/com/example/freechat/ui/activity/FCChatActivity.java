@@ -29,6 +29,7 @@ public class FCChatActivity extends FCActionBarActivity {
     private ListView m_chatListView;
     private Button m_sendTxtButton;
     private Button m_sendPictureButton;
+    private Button m_sendAudioButton;
     private EditText m_sendMessgeText;
     
     private FCMessageAdapter m_messageAdapter;
@@ -85,6 +86,7 @@ public class FCChatActivity extends FCActionBarActivity {
         m_chatListView = (ListView) findViewById(R.id.lv_chat_list);
         m_sendPictureButton = (Button) findViewById(R.id.bt_send_picture);
         m_sendTxtButton = (Button) findViewById(R.id.bt_send_txt);
+        m_sendAudioButton = (Button) findViewById(R.id.bt_send_audio);
         m_sendMessgeText = (EditText) findViewById(R.id.et_chatinfo);
         
         m_sendPictureButton.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +94,14 @@ public class FCChatActivity extends FCActionBarActivity {
             public void onClick(View v) {
             }
         });
+        
+        m_sendAudioButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
 
         m_sendTxtButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -40,6 +40,7 @@ public class FCSessionFragment extends Fragment {
     void initUI() {
     	m_sessionList = new ArrayList<FCSession>();
         m_sessionListView = (ListView) rootView.findViewById(R.id.lv_session_list);
+        m_sessionList.add(new FCSession("testSession", "123"));
         m_adapter = new FCSessionAdapter(getActivity().getApplicationContext(), m_sessionList);
         m_sessionListView.setAdapter(m_adapter);
     }
