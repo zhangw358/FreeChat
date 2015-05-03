@@ -54,7 +54,8 @@ public class FCFriendFragment extends Fragment {
         m_friendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), FCChatActivity.class);
+                Intent intent = new Intent(getActivity(), FCChatActivity.class);              
+                intent.putExtra("userid", m_friendList.get(position).getName());
                 startActivity(intent);
             }
         });

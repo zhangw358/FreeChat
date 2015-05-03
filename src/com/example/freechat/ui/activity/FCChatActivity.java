@@ -6,6 +6,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.text.style.LineHeightSpan.WithDensity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.example.freechat.FCPushService;
 import com.example.freechat.R;
 import com.example.freechat.aidl.AIDLChatActivity;
 import com.example.freechat.aidl.AIDLPushService;
+import com.example.freechat.storage.DatabaseHandler;
 import com.example.freechat.ui.FCActionBarActivity;
 import com.example.freechat.ui.FCMessage;
 import com.example.freechat.ui.FCMessageAdapter;
@@ -35,6 +37,9 @@ public class FCChatActivity extends FCActionBarActivity {
     private FCMessageAdapter m_messageAdapter;
     private List<FCMessage> m_messageList;    
 
+    private String m_userid;
+    
+    private DatabaseHandler m_dbhandler;
     
     private AIDLChatActivity.Stub mCallback = new AIDLChatActivity.Stub() {
 
@@ -78,11 +83,15 @@ public class FCChatActivity extends FCActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         initUI();
-        initChatList();
+        initChatListFromDB();
         bindMyPushService();
     }
 
     private void initUI() {
+    	
+    	m_userid = getIntent().getExtras().getString("userid");
+    	setActionBarCenterTitle("chat with " + m_userid);
+    	
         m_chatListView = (ListView) findViewById(R.id.lv_chat_list);
         m_sendPictureButton = (Button) findViewById(R.id.bt_send_picture);
         m_sendTxtButton = (Button) findViewById(R.id.bt_send_txt);
@@ -116,11 +125,12 @@ public class FCChatActivity extends FCActionBarActivity {
         });
     }
 
-    private void initChatList() {
+    private void initChatListFromDB() {
         m_messageList = new ArrayList<FCMessage>();
         m_messageAdapter = new FCMessageAdapter(this, m_messageList);
+        m_dbhandler = new DatabaseHandler(getApplicationContext());
+        m_messageList.addAll(m_dbhandler.selectMessageByName(m_userid));
         m_chatListView.setAdapter(m_messageAdapter);
-
     }
     
     @Override

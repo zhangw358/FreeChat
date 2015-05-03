@@ -21,12 +21,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TABLE_NAME    = "messages";
 	private static final String COLUMN_ID     = "_id";
 	private static final String COLUMN_NAME	  = "name";
-	private static final String COLUMN_TIME   = "time";
+	private static final String COLUMN_TIME   = "timestamp";
 	private static final String COLUMN_VALUE  = "value";
 	private static final String COLUMN_ATTR   = "attribute";
 	private static final String CREATE_TABLE  = "CREATE TABLE " + TABLE_NAME + " (" + 
-		COLUMN_ID + " TEXT PRIMARY KEY AUTOINCREMENT," +
-		COLUMN_NAME + " TEXT" +
+		COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+		COLUMN_NAME + " TEXT," +
 		COLUMN_TIME + " INTEGER," +
 		COLUMN_ATTR + " INTEGER," +
 		COLUMN_VALUE + " TEXT" +
@@ -40,6 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
+		Log.v("database", CREATE_TABLE);
 		db.execSQL(CREATE_TABLE);
 	}
 
