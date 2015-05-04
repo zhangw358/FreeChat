@@ -117,10 +117,13 @@ public class FCChatActivity extends FCActionBarActivity {
             public void onClick(View v) {
             	String sendInfo = m_sendMessgeText.getText().toString();
             	m_sendMessgeText.setText("");
-                m_messageList.add(new FCMessage(sendInfo, FCMessage.SEND_MESSAGE));
-                
+            	FCMessage message = new FCMessage(sendInfo, FCMessage.SEND_MESSAGE);
+            	
+                m_messageList.add(message);
                 m_messageAdapter.notifyDataSetChanged();
                 m_chatListView.setSelection(m_messageList.size()-1);
+                
+                m_dbhandler.insertMessage(m_userid, message);
             }
         });
     }

@@ -75,10 +75,12 @@ public class DatabaseHandler {
 	}
 	
 	public List<FCSession> selectAllSession() {
+		
+		openDB();
 		List<FCSession> sessions = new ArrayList<FCSession>();
 		String [] columns = new String[]{NAME};
-		Cursor cursor = database.query(true, dbHelper.getDatabaseName(),
-										columns, null, null, null, null, null, null);
+		Cursor cursor = database.query(true, dbHelper.getTableName(), columns, null, null, null, null, null, null, null);
+		//Cursor cursor = database.rawQuery("select * from messages", columns);
 		cursor.moveToFirst();
 		while(! cursor.isAfterLast()) {
 			FCSession session = cursorToSession(cursor);
