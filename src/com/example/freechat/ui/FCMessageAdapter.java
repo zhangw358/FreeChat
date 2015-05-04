@@ -42,12 +42,12 @@ public class FCMessageAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        int messageType = m_messageList.get(position).getMessageType();
-        convertView = LayoutInflater.from(m_context).inflate(m_layout[messageType], null);
+        int messageAttr = m_messageList.get(position).getMessageAttr();
+        convertView = LayoutInflater.from(m_context).inflate(m_layout[messageAttr], null);
 
         TextView textView = null;
 
-        switch (messageType) {
+        switch (messageAttr) {
             case FCMessage.RECEIVE_MESSAGE :
                 textView = (TextView) convertView.findViewById(R.id.tv_message_receive);
                 break;
