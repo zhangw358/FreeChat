@@ -47,7 +47,7 @@ public class FCSessionFragment extends Fragment {
         return rootView;
     }
     
-    void initUI() {
+    public void initUI() {
     	m_sessionList = new ArrayList<FCSession>();
     	m_dbHandler = new DatabaseHandler(m_context);
     	
@@ -65,6 +65,12 @@ public class FCSessionFragment extends Fragment {
             }
         });
     }
+    
+    public void reloadData() {
+    	if (m_dbHandler != null && m_sessionList !=null) {
+    		m_sessionList = m_dbHandler.selectAllSession();
+    	}
+	}
 
     @Override
     public void onAttach(Activity activity) {

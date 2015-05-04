@@ -3,11 +3,13 @@ package com.example.freechat.ui.activity;
 
 import com.example.freechat.R;
 import com.example.freechat.ui.FCActionBarActivity;
+import com.example.freechat.ui.FCSessionFragment;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RadioGroup;
@@ -83,7 +85,7 @@ public class FCMainActivity extends FCActionBarActivity {
         int id = item.getItemId();
         switch (id) {
 		case android.R.id.home:
-			finish();
+			//finish();
 			break;
 			
 		case R.id.action_refresh:
@@ -93,5 +95,12 @@ public class FCMainActivity extends FCActionBarActivity {
 			break;
 		}
         return super.onOptionsItemSelected(item);
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
+    	Log.v("main activity", "resume!");
+    	((FCSessionFragment) m_fragments[1]).reloadData();
     }
 }
