@@ -29,7 +29,9 @@ public class FCLoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FCLoginActivity.this, FCMainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 
