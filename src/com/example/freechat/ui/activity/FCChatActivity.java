@@ -6,7 +6,6 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.text.style.LineHeightSpan.WithDensity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,16 +43,18 @@ public class FCChatActivity extends FCActionBarActivity {
     private AIDLChatActivity.Stub mCallback = new AIDLChatActivity.Stub() {
 
 		@Override
-		public void onNewMessageReceived(String from, String to, int timeStamp,
-				String content) throws RemoteException {
+		public void onMessageSendFinished(String message)
+				throws RemoteException {
+			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
-		public void onMessageSendFinished(String from, String to,
-				int timeStamp, String content) throws RemoteException {
+		public void onNewMessageReceived(String message) throws RemoteException {
+			// TODO Auto-generated method stub
 			
 		}
+
 	};
 	
 	private AIDLPushService mPushService;

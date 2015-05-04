@@ -1,5 +1,15 @@
 package com.example.freechat;
 
 public class FCConfigure {
-	public static final String SERVER_ADDR = "http://172.18.34.38";
+	/*
+	 * server on the Internet
+	 */
+	public static final String SERVER_ADDR = "192.168.0.169";
+	
+	public static final int SERVER_TCP_PORT = 10000;
+	
+	/*
+	 * server on this device
+	 */
+	public static final int LOCAL_SERVER_PORT = 3000;
 }
