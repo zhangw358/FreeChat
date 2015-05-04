@@ -45,7 +45,7 @@ public class DatabaseHandler {
 		
 		cv.put(NAME,  name);
 		cv.put(TIME, msg.getTimeStamp());
-		cv.put(ATTR, msg.getMessageType());
+		cv.put(ATTR, msg.getMessageAttr());
 		cv.put(VALUE, msg.getContent());
 		database.insert(dbHelper.getTableName(), NAME, cv);
 		
