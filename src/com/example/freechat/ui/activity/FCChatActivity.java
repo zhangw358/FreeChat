@@ -10,9 +10,12 @@ import android.text.style.LineHeightSpan.WithDensity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +114,18 @@ public class FCChatActivity extends FCActionBarActivity {
 				
 			}
 		});
-
+        
+        m_chatListView.setOnItemClickListener(new OnItemClickListener() {
+        	
+        	@Override
+        	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        		Toast.makeText(getApplicationContext(), "type"+m_messageList.get(position).getMessageType(), 
+        				Toast.LENGTH_SHORT).show();
+        		
+        	}
+		});
+        
+        
         m_sendTxtButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

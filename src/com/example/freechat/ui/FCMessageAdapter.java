@@ -56,7 +56,7 @@ public class FCMessageAdapter extends BaseAdapter{
                 break;
         }
 
-        textView.setText(m_messageList.get(position).getContent());
+        textView.setText(m_messageList.get(position).setToListView());
 
         return convertView;
     }

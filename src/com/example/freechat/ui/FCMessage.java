@@ -18,10 +18,11 @@ public class FCMessage {
     private int  m_messageType;  //类型: 是文本\图片\语音
     
 
-    public FCMessage(String content, long timeStamp, int attr) {
+    public FCMessage(String content, int attr, int type, long timeStamp) {
         m_content = content;
-        m_timeStamp = timeStamp;
         m_messageAttr = attr;
+        m_messageType = type;
+        m_timeStamp = timeStamp;
     }
 
     public FCMessage(String content, int attr) {
@@ -31,8 +32,24 @@ public class FCMessage {
         m_timeStamp = System.currentTimeMillis();
     }
 
+    public String setToListView() {
+        String content = null;
+        switch (m_messageType) {
+        	case TYPE_TXT:
+        		content = m_content;
+        		break;
+        	case TYPE_PIC:
+        		content = "send a picture, click to check";
+        		break;
+        	case TYPE_AUD:
+        		content = "send a audio, click to check";
+        		break;
+        }
+        return content;
+    }
+    
     public String getContent() {
-        return m_content;
+    	return m_content;
     }
 
     public long getTimeStamp() {

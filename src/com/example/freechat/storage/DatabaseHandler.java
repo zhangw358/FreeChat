@@ -22,6 +22,7 @@ public class DatabaseHandler {
 	private final String TAG   = "DatabaseHandler";
 	static final String NAME   = "name";
 	static final String ATTR   = "attribute";
+	static final String TYPE   = "type";
 	static final String TIME   = "timestamp";
 	static final String VALUE  = "value";
 	private DatabaseHelper dbHelper;
@@ -46,6 +47,7 @@ public class DatabaseHandler {
 		cv.put(NAME,  name);
 		cv.put(TIME, msg.getTimeStamp());
 		cv.put(ATTR, msg.getMessageAttr());
+		cv.put(TYPE, msg.getMessageType());
 		cv.put(VALUE, msg.getContent());
 		database.insert(dbHelper.getTableName(), NAME, cv);
 		
@@ -60,7 +62,7 @@ public class DatabaseHandler {
 		
 		openDB();
 		List<FCMessage> messages = new ArrayList<FCMessage>();
-		String [] columns = new String[]{ATTR, TIME, VALUE};
+		String [] columns = new String[]{ATTR,TYPE, TIME, VALUE};
 		String selection = new String(NAME + "=?");
 		String [] selectionArgs = new String[]{name};
 		Cursor cursor = database.query(dbHelper.getTableName(), columns, selection, selectionArgs, null, null, null);
@@ -93,9 +95,10 @@ public class DatabaseHandler {
 	
 	private FCMessage cursorToMessage(Cursor cursor) {
 		int attribute = cursor.getInt(0);
-		long timeStamp = cursor.getLong(1);
-		String info = cursor.getString(2);
-		FCMessage msg = new FCMessage(info, timeStamp, attribute);
+		int type = cursor.getInt(1);
+		long timeStamp = cursor.getLong(2);
+		String info = cursor.getString(3);
+		FCMessage msg = new FCMessage(info, attribute, type, timeStamp);
 		return msg;
 	}
 	

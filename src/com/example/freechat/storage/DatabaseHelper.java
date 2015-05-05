@@ -24,11 +24,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String COLUMN_TIME   = "timestamp";
 	private static final String COLUMN_VALUE  = "value";
 	private static final String COLUMN_ATTR   = "attribute";
+	private static final String COLUMN_TYPE   = "type";
 	private static final String CREATE_TABLE  = "CREATE TABLE " + TABLE_NAME + " (" + 
 		COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
 		COLUMN_NAME + " TEXT," +
 		COLUMN_TIME + " INTEGER," +
 		COLUMN_ATTR + " INTEGER," +
+		COLUMN_TYPE + " INTEGER," +
 		COLUMN_VALUE + " TEXT" +
 		");";
 
