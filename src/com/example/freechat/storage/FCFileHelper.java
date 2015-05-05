@@ -1,4 +1,4 @@
-package com.example.testfilehelper;
+package com.example.freechat.storage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

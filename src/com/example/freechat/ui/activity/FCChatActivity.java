@@ -104,6 +104,8 @@ public class FCChatActivity extends FCActionBarActivity {
         m_sendPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            	Intent intent = new Intent(FCChatActivity.this, FCPictureActivity.class);
+            	startActivity(intent);
             }
         });
         
