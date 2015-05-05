@@ -11,12 +11,13 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int Black=0x7f040004;
+        public static final int Black=0x7f040005;
         public static final int Clearwhite=0x7f040000;
-        public static final int Grey=0x7f040005;
-        public static final int Red=0x7f040003;
-        public static final int Skyblue=0x7f040002;
-        public static final int White=0x7f040006;
+        public static final int Grey=0x7f040006;
+        public static final int Red=0x7f040004;
+        public static final int Skyblue=0x7f040003;
+        public static final int White=0x7f040007;
+        public static final int clearcolor=0x7f040002;
         public static final int list_background=0x7f040001;
     }
     public static final class dimen {
@@ -31,45 +32,88 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int icon=0x7f020001;
-        public static final int login_button=0x7f020002;
+        public static final int chat_item_send_layer=0x7f020000;
+        public static final int chat_title_layer=0x7f020001;
+        public static final int fc_back=0x7f020002;
+        public static final int fc_rounded_rectangle_background=0x7f020003;
+        public static final int fcbutton_style=0x7f020004;
+        public static final int ic_action_refresh=0x7f020005;
+        public static final int ic_defaultuser=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int icon=0x7f020008;
+        public static final int receive_bubble=0x7f020009;
+        public static final int send_bubble=0x7f02000a;
     }
     public static final class id {
-        public static final int action_settings=0x7f090009;
-        public static final int bt_goto_reg=0x7f090003;
-        public static final int bt_login=0x7f090002;
-        public static final int bt_reg=0x7f090008;
-        public static final int et_checkpassword=0x7f090007;
-        public static final int et_newpassword=0x7f090006;
-        public static final int et_newusername=0x7f090005;
-        public static final int et_password=0x7f090001;
-        public static final int et_username=0x7f090000;
-        public static final int imageView=0x7f090004;
+        public static final int action_refresh=0x7f09001c;
+        public static final int bt_goto_reg=0x7f09000e;
+        public static final int bt_login=0x7f09000d;
+        public static final int bt_reg=0x7f090013;
+        public static final int bt_send_audio=0x7f090002;
+        public static final int bt_send_picture=0x7f090001;
+        public static final int bt_send_txt=0x7f090004;
+        public static final int chat_bottom_linear=0x7f090000;
+        public static final int et_chatinfo=0x7f090003;
+        public static final int et_checkpassword=0x7f090012;
+        public static final int et_newpassword=0x7f090011;
+        public static final int et_newusername=0x7f090010;
+        public static final int et_password=0x7f09000c;
+        public static final int et_username=0x7f09000b;
+        public static final int fragment_friend=0x7f090006;
+        public static final int fragment_session=0x7f090008;
+        public static final int imageView=0x7f09000f;
+        public static final int img_header=0x7f090019;
+        public static final int lv_chat_list=0x7f090005;
+        public static final int lv_friend_list=0x7f090018;
+        public static final int lv_session_list=0x7f090017;
+        public static final int rb_left=0x7f090009;
+        public static final int rb_right=0x7f09000a;
+        public static final int rg_bottomGroup=0x7f090007;
+        public static final int tv_ab_title=0x7f090016;
+        public static final int tv_friend_name=0x7f09001a;
+        public static final int tv_message_receive=0x7f090014;
+        public static final int tv_message_send=0x7f090015;
+        public static final int tv_session_name=0x7f09001b;
     }
     public static final class layout {
-        public static final int activity_login=0x7f030000;
-        public static final int activity_register=0x7f030001;
+        public static final int activity_chat=0x7f030000;
+        public static final int activity_fcmain=0x7f030001;
+        public static final int activity_login=0x7f030002;
+        public static final int activity_register=0x7f030003;
+        public static final int chat_item_receive=0x7f030004;
+        public static final int chat_item_send=0x7f030005;
+        public static final int fc_customview_actionbar=0x7f030006;
+        public static final int fragment_fcsession=0x7f030007;
+        public static final int fragment_friend=0x7f030008;
+        public static final int friend_item=0x7f030009;
+        public static final int session_item=0x7f03000a;
     }
     public static final class menu {
-        public static final int login=0x7f080000;
+        public static final int fcaction_bar=0x7f080000;
+        public static final int fcchat=0x7f080001;
+        public static final int fcmain=0x7f080002;
+        public static final int fcregister=0x7f080003;
     }
     public static final class string {
-        public static final int action_settings=0x7f060002;
+        public static final int action_refresh=0x7f060002;
         public static final int app_name=0x7f060000;
+        public static final int audio=0x7f060008;
+        public static final int hello_blank_fragment=0x7f06000a;
         public static final int hello_world=0x7f060001;
+        public static final int hint_passwd=0x7f06000c;
+        public static final int hint_passwd_confirm=0x7f06000d;
+        public static final int hint_username=0x7f06000b;
+        public static final int pic=0x7f060007;
+        public static final int send=0x7f060006;
+        public static final int sign_up=0x7f06000e;
+        public static final int title_activity_chat=0x7f060004;
+        public static final int title_activity_fcaction_bar=0x7f060005;
+        public static final int title_activity_fcmain=0x7f060009;
+        public static final int title_activity_register=0x7f060003;
     }
     public static final class style {
+        public static final int AcBar_titleStyle=0x7f070002;
         /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
@@ -81,10 +125,11 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
+        public static final int AppBaseTheme=0x7f070004;
+        /**  Base application theme. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f070000;
+        public static final int my_actionbar_style=0x7f070001;
+        public static final int tab_rb_style=0x7f070003;
     }
 }

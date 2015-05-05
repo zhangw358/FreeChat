@@ -1,11 +1,17 @@
-package com.example.freechat.storage;
+package com.example.testfilehelper;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import android.content.Context;
+import android.text.TextUtils.TruncateAt;
+import android.widget.Toast;
 
 public class FCFileHelper {
 
@@ -23,7 +29,41 @@ public class FCFileHelper {
 		File file = new File(m_dataPath + fileName);
 		return file.exists();
 	}
+	
 
+	public void wirteToFile(String fileName, byte [] src) {
+		try {
+			FileOutputStream out = m_context.openFileOutput(fileName, Context.MODE_PRIVATE);
+			out.write(src);
+			out.close();
+			Toast.makeText(m_context, "save!", Toast.LENGTH_LONG).show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public byte [] loadFile(String fileName) {
+		try {
+			FileInputStream in = m_context.openFileInput(fileName);
+			ByteArrayOutputStream out = new ByteArrayOutputStream(); 
+			byte [] buffer = new byte[BUFFLEN];
+			int length = -1;
+			while((length=in.read(buffer)) != -1) {
+				out.write(buffer, 0, length);
+			}
+			out.close();
+			in.close();
+			Toast.makeText(m_context, "load!", Toast.LENGTH_LONG).show();
+			return out.toByteArray();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public boolean copyFileTo(File srcFile, File destFile) throws IOException {
 		if (srcFile.isDirectory() || destFile.isDirectory())
 			return false;// 判断是否是文件
