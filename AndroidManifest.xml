@@ -7,7 +7,11 @@
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="21" />
-
+    
+    <!-- System Access -->
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> 
+	<uses-permission android:name="android.permission.RECORD_AUDIO" /> 
+	
     <!-- Internet Access -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -33,6 +37,7 @@
         <activity android:name=".ui.activity.FCRegisterActivity" />
         <activity android:name=".ui.activity.FCChatActivity" />
         <activity android:name=".ui.activity.FCMainActivity" />
+        <activity android:name=".ui.activity.FCPictureActivity" />
         <activity android:name=".FCTChatActivity" />
         <service android:name=".FCPushService" />
     </application>
