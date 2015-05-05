@@ -1,6 +1,7 @@
 package com.example.freechat.ui.activity;
 
 
+import com.example.freechat.FCTChatActivity;
 import com.example.freechat.R;
 import com.example.freechat.ui.FCActionBarActivity;
 import com.example.freechat.ui.FCSessionFragment;
@@ -8,6 +9,7 @@ import com.example.freechat.ui.FCSessionFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -89,6 +91,8 @@ public class FCMainActivity extends FCActionBarActivity {
 			break;
 			
 		case R.id.action_refresh:
+			Intent intent = new Intent(FCMainActivity.this, FCTChatActivity.class);
+			startActivity(intent);
 			break;
 
 		default:

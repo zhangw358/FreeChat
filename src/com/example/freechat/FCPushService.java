@@ -44,7 +44,6 @@ public class FCPushService extends Service {
 
 	public void onCreate() {
 		mClientSocket = new FCLocalClientSocket();
-		mClientSocket.startReceiveData();
 	};
 
 	@Override

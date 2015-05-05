@@ -45,13 +45,11 @@ public class FCChatActivity extends FCActionBarActivity {
 		@Override
 		public void onMessageSendFinished(String message)
 				throws RemoteException {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onNewMessageReceived(String message) throws RemoteException {
-			// TODO Auto-generated method stub
 			
 		}
 

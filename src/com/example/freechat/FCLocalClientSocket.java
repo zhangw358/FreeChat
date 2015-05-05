@@ -1,12 +1,12 @@
 package com.example.freechat;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 
 import android.os.RemoteException;
 import android.util.Log;
@@ -18,6 +18,8 @@ public class FCLocalClientSocket {
 			.toString();
 	private AIDLChatActivity mCallback;
 	private Socket mClient;
+	private BufferedWriter mWriter;
+	private InputStream mIn;
 
 	public FCLocalClientSocket() {
 		initSocket();
@@ -39,6 +41,9 @@ public class FCLocalClientSocket {
 				try {
 					mClient = new Socket(FCConfigure.SERVER_ADDR,
 							FCConfigure.SERVER_TCP_PORT);
+					mIn = mClient.getInputStream();
+					mWriter = new BufferedWriter(new OutputStreamWriter(
+							mClient.getOutputStream()));
 				} catch (UnknownHostException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -51,7 +56,7 @@ public class FCLocalClientSocket {
 		}).start();
 	}
 
-	public void startReceiveData() {
+	private void startReceiveData() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -61,41 +66,20 @@ public class FCLocalClientSocket {
 	}
 
 	private void doStartReceive() {
+		byte[] buffer = new byte[1024 * 4];
+		int length = 0;
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					mClient.getInputStream()));
-			while (true) {
-				try {
-					Thread.sleep(200);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				Log.e("Halfish", "while true...");
-				if (mCallback == null) {
-					Log.e("Halfish", "mCallBack is null");
-					// has not register yet
-					continue;
-				}
-				Log.e("Halfish", "begin to read message..");
-				
-				String msg = "";
-				
-				msg = reader.readLine();
-				//reader.r
-				Log.e("halfish", "reader.readLine() " + msg);
-				
-				if (!msg.equals("")) {
-					try {
-						mCallback.onNewMessageReceived(msg);
-					} catch (RemoteException e) {
-						e.printStackTrace();
-					}
+			while (!mClient.isClosed() && !mClient.isInputShutdown()
+					&& ((length = mIn.read(buffer)) != -1)) {
+				if (length > 0) {
+					String message = new String(Arrays.copyOf(buffer, length))
+							.trim();
+					mCallback.onNewMessageReceived(message);
 				}
 			}
-
 		} catch (IOException e) {
-			Log.e("halfish", "RemoteException" + e.getMessage().toString());
+			e.printStackTrace();
+		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}
@@ -111,10 +95,8 @@ public class FCLocalClientSocket {
 			return false;
 
 		} else {
-			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-					mClient.getOutputStream()));
-			writer.write(msg);
-			writer.flush();
+			mWriter.write(msg);
+			mWriter.flush();
 		}
 		return true;
 	}
