@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.RemoteException;
 import android.text.style.LineHeightSpan.WithDensity;
 import android.view.Menu;
@@ -119,8 +120,20 @@ public class FCChatActivity extends FCActionBarActivity {
         	
         	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        		Toast.makeText(getApplicationContext(), "type"+m_messageList.get(position).getMessageType(), 
-        				Toast.LENGTH_SHORT).show();
+        		int type = m_messageList.get(position).getMessageType();
+        		switch (type) {
+				case FCMessage.TYPE_TXT:
+					Toast.makeText(getApplicationContext(), "txt", Toast.LENGTH_SHORT).show();
+					break;
+				case FCMessage.TYPE_PIC:
+					//TODO: show picture alert
+					break;
+				case FCMessage.TYPE_AUD:
+					//TODO: show audio alert
+					break;
+				default:
+					break;
+				}
         		
         	}
 		});
