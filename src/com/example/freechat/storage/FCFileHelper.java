@@ -30,8 +30,12 @@ public class FCFileHelper {
 		return file.exists();
 	}
 	
+	public String generateFileName() {
+		Long random = new Long(System.currentTimeMillis() & 99);
+		return random.toString();
+	}
 
-	public void wirteToFile(String fileName, byte [] src) {
+	public void writeToFile(String fileName, byte [] src) {
 		try {
 			FileOutputStream out = m_context.openFileOutput(fileName, Context.MODE_PRIVATE);
 			out.write(src);

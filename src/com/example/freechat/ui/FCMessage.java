@@ -24,6 +24,13 @@ public class FCMessage {
         m_messageType = type;
         m_timeStamp = timeStamp;
     }
+    
+    public FCMessage(String content, int attr, int type) {
+        m_content = content;
+        m_messageAttr = attr;
+        m_messageType = type;
+        m_timeStamp = System.currentTimeMillis();
+    }
 
     public FCMessage(String content, int attr) {
         m_content = content;

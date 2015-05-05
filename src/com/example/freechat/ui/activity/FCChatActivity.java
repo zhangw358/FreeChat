@@ -30,7 +30,9 @@ import com.example.freechat.ui.FCMessage;
 import com.example.freechat.ui.FCMessageAdapter;
 
 public class FCChatActivity extends FCActionBarActivity {
-
+	public static final int PIC_REQUEST = 1;
+	public static final int AUD_REQUEST = 2;
+	
     private ListView m_chatListView;
     private Button m_sendTxtButton;
     private Button m_sendPictureButton;
@@ -89,7 +91,20 @@ public class FCChatActivity extends FCActionBarActivity {
         initChatListFromDB();
         bindMyPushService();
     }
-
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
+    	super.onActivityResult(requestCode, resultCode, data);
+    	
+    	if(requestCode == FCChatActivity.PIC_REQUEST && resultCode == RESULT_OK) {
+    		String content = data.getStringExtra("content");
+    		FCMessage msg = new FCMessage(content, FCMessage.SEND_MESSAGE, FCMessage.TYPE_PIC);
+    		m_messageList.add(msg);
+    		m_dbhandler.insertMessage(m_userid, msg);
+    	}
+    	
+    }
+    
     private void initUI() {
     	
     	m_userid = getIntent().getExtras().getString("userid");
@@ -105,7 +120,7 @@ public class FCChatActivity extends FCActionBarActivity {
             @Override
             public void onClick(View v) {
             	Intent intent = new Intent(FCChatActivity.this, FCPictureActivity.class);
-            	startActivity(intent);
+            	startActivityForResult(intent, PIC_REQUEST);
             }
         });
         

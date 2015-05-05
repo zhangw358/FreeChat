@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.freechat.R;
+import com.example.freechat.storage.FCFileHelper;
 import com.example.freechat.ui.FCActionBarActivity;
 
 public class FCPictureActivity extends FCActionBarActivity {
@@ -28,9 +29,16 @@ public class FCPictureActivity extends FCActionBarActivity {
 	 private Button zx_button1;
 	 private Button zx_button2;
 	 
+	 private FCFileHelper m_fileHelper;
+	 
+	 public interface onSendPictureCallback {
+		 public void onSendPictureFinish(String content);
+	 } 
+	 
 	 @Override
 	 protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
+	        
 	        Intent i = new Intent(Intent.ACTION_PICK, 
         		android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);//调用android的图库 
         	startActivityForResult(i, RESULT_LOAD_IMAGE);
@@ -78,12 +86,19 @@ public class FCPictureActivity extends FCActionBarActivity {
 	            zx_imageView = (ImageView) findViewById(R.id.zx_imageView1);
 	            zx_imageView.setImageBitmap(bmp);
 
+	            m_fileHelper = new FCFileHelper(getApplicationContext());
+	            
 	            zx_button1.setOnClickListener(new Button.OnClickListener() {
 	    			
 	    			@Override
 	    			public void onClick(View v) {
 	    				// TODO Auto-generated method stub
 	    				byte [] data = compressBitmap();
+	    				Intent intent = new Intent();
+	    				String fileName = m_fileHelper.generateFileName();
+	    				m_fileHelper.writeToFile(fileName, data);
+	    				intent.putExtra("content", fileName);
+	    				setResult(RESULT_OK, intent);
 	    				finish();
 	    			}
 	    		});

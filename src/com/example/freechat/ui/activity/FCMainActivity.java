@@ -17,8 +17,8 @@ import android.widget.RadioGroup;
 
 
 public class FCMainActivity extends FCActionBarActivity {
-
-    private Fragment [] m_fragments;
+    
+	private Fragment [] m_fragments;
     private FragmentManager m_fragmentManager;
     private FragmentTransaction m_fragmentTransaction;
     private RadioGroup m_bottomGroup;
