@@ -26,6 +26,7 @@ public class FCBrowseActivity extends FCActionBarActivity {
 		super.onCreate(savedInstanceState);
 		
 		picaddr = getIntent().getExtras().getString("address");
+		Log.v("picture browser", picaddr);
 		setContentView(R.layout.zx_browse);
 		setActionBarCenterTitle("Browse");
 		imageView = (ImageView)findViewById(R.id.zx_browse);

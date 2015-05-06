@@ -1,6 +1,5 @@
 package com.example.freechat.ui.activity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +17,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class FCRegisterActivity extends FCActionBarActivity implements OnRegisterFinishedCallBack {
 
 	private Button m_regButton;
+	private EditText m_userName;
+	private EditText m_passWord;
+	private EditText m_confirm_passWord;
+	private EditText m_emailAddress;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +38,23 @@ public class FCRegisterActivity extends FCActionBarActivity implements OnRegiste
 	}
 
 	private void initWidgets() {
-		Toast.makeText(this, "initWidget", Toast.LENGTH_SHORT).show();
-		Log.e("Halfish", "initWidget");
+		
 		m_regButton = (Button) findViewById(R.id.bt_reg);
+		m_userName = (EditText) findViewById(R.id.et_newusername);
+		m_passWord = (EditText) findViewById(R.id.et_newpassword);
+		m_confirm_passWord = (EditText) findViewById(R.id.et_checkpassword);
+		m_emailAddress = (EditText) findViewById(R.id.et_emailAddress);
+		
 		m_regButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Log.e("Halfish", "register Button clicked");
-				startRegisterTask();
+				String password = m_passWord.getText().toString();
+				String confirmPassword = m_confirm_passWord.getText().toString();
+				if (password.equals(confirmPassword)) {
+					startRegisterTask();
+				}
+				else {
+					Toast.makeText(getApplicationContext(), "wrong Password", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 	}
@@ -48,9 +62,9 @@ public class FCRegisterActivity extends FCActionBarActivity implements OnRegiste
 	private void startRegisterTask() {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("action", "register"));
-		params.add(new BasicNameValuePair("username", "halfish"));
-		params.add(new BasicNameValuePair("password", "halfish"));
-		params.add(new BasicNameValuePair("mail", "shirhalfish@gmail.com"));
+		params.add(new BasicNameValuePair("username", m_userName.getText().toString()));
+		params.add(new BasicNameValuePair("password", m_passWord.getText().toString()));
+		params.add(new BasicNameValuePair("mail", m_emailAddress.getText().toString()));
 		
 		new FCRegisterTask(params, this).start();
 	}

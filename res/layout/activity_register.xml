@@ -38,13 +38,25 @@
         android:layout_centerHorizontal="true" />
 
     <Button
+        android:id="@+id/bt_reg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="61dp"
         android:background="@drawable/fcbutton_style"
         android:text="@string/sign_up"
-        android:textColor="@color/Clearwhite"
-        android:id="@+id/bt_reg"
-        android:layout_below="@+id/et_checkpassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />
+        android:textColor="@color/Clearwhite" />
+
+    <EditText
+        android:id="@+id/et_emailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_reg"
+        android:layout_alignLeft="@+id/et_checkpassword"
+        android:layout_alignRight="@+id/et_checkpassword"
+        android:layout_marginBottom="38dp"
+        android:ems="10"
+        android:hint="your email address" />
+
 </RelativeLayout>
