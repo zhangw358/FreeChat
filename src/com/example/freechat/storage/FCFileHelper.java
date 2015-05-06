@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import android.content.Context;
 import android.os.Environment;
@@ -21,11 +23,13 @@ public class FCFileHelper {
 	private Context m_context;
 	private String m_dataPath; // /data/data/com.example.package/
 	private String m_sdPath;
+	private SimpleDateFormat formatter;
 	
 	public FCFileHelper(Context context) {
 		m_context = context;
 		m_dataPath = m_context.getFilesDir().getPath() + "/";
 		m_sdPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
+		formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	}
 
 	public boolean isDataFileExist(String fileName) {
@@ -35,7 +39,8 @@ public class FCFileHelper {
 	
 	public String generateFileName() {
 		//TODO filename;
-		return m_sdPath + "test";
+		Date curDate = new Date(System.currentTimeMillis());
+		return m_sdPath + formatter.format(curDate);
 	}
 
 	public void writeToFile(String fileName, byte [] src) {

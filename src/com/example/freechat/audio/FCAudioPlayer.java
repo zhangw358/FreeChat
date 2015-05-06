@@ -13,11 +13,11 @@ public class FCAudioPlayer {
 	private Context mContext;
 	
 	public FCAudioPlayer(Context context) {
-		mPlayer = new MediaPlayer();
 		mContext = context;
 	}
 	
 	public void play (String fileName) {
+		mPlayer = new MediaPlayer();
 		try {
 			mPlayer.setDataSource(fileName);
 			mPlayer.prepare();
