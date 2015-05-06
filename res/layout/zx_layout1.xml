@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+     >
     
-    <Button
-        android:id="@+id/zx_button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="33dp"
-        android:text="Send" />
+    <ImageView
+        android:id="@+id/zx_imageView1"
+        android:layout_above="@+id/zx_button1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
     <Button
         android:id="@+id/zx_button2"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/zx_button1"
-        android:layout_alignBottom="@+id/zx_button1"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="44dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
         android:text="Cancel" />
-    <ImageView
-        android:id="@+id/zx_imageView1"
-        android:layout_below="@+id/zx_button1"
+
+    <Button
+        android:id="@+id/zx_button1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/zx_button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/fcbutton_style"
+        android:text="Send"
+        android:textColor="@color/Clearwhite"
+         />
+
 </RelativeLayout>

@@ -103,15 +103,13 @@ public class FCChatActivity extends FCActionBarActivity {
     	if(requestCode == FCChatActivity.PIC_REQUEST && resultCode == RESULT_OK) {
     		String content = data.getStringExtra("content");
     		FCMessage msg = new FCMessage(content, FCMessage.SEND_MESSAGE, FCMessage.TYPE_PIC);
-    		m_messageList.add(msg);
-    		m_dbhandler.insertMessage(m_userid, msg);
+    		updateMessageList(msg);
     	}
     	
     	if(requestCode == FCChatActivity.AUD_REQUEST && resultCode == RESULT_OK) {
     		String content = data.getStringExtra("content");
     		FCMessage msg = new FCMessage(content, FCMessage.SEND_MESSAGE, FCMessage.TYPE_AUD);
-    		m_messageList.add(msg);
-    		m_dbhandler.insertMessage(m_userid, msg);
+    		updateMessageList(msg);
     	}
     	
     }
@@ -174,15 +172,17 @@ public class FCChatActivity extends FCActionBarActivity {
             public void onClick(View v) {
             	String sendInfo = m_sendMessgeText.getText().toString();
             	m_sendMessgeText.setText("");
-            	FCMessage message = new FCMessage(sendInfo, FCMessage.SEND_MESSAGE);
-            	
-                m_messageList.add(message);
-                m_messageAdapter.notifyDataSetChanged();
-                m_chatListView.setSelection(m_messageList.size()-1);
-                
-                m_dbhandler.insertMessage(m_userid, message);
+            	FCMessage message = new FCMessage(sendInfo, FCMessage.SEND_MESSAGE);           	
+                updateMessageList(message);           
             }
         });
+    }
+    
+    private void updateMessageList(FCMessage msg) {
+    	m_messageList.add(msg);
+        m_messageAdapter.notifyDataSetChanged();
+        m_chatListView.setSelection(m_messageList.size()-1);
+        m_dbhandler.insertMessage(m_userid, msg);
     }
 
     private void initChatListFromDB() {

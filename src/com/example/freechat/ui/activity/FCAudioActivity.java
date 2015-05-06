@@ -33,7 +33,7 @@ public class FCAudioActivity extends FCActionBarActivity {
 		mFileHelper = new FCFileHelper(this);
 		mFileName = mFileHelper.generateFileName();
 		showPath.setText(mFileName);
-
+		mRecorder = new FCAudioRecorder();
 		// start record
 		mRecorder.startRecord(mFileName);
 		

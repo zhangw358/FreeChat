@@ -12,12 +12,12 @@ public class FCAudioRecorder {
 	private MediaRecorder mRecorder;
 
 	public FCAudioRecorder() {
-		
+		mRecorder = new MediaRecorder();
 	}
 
 	public void startRecord(String FileName) {
 		// TODO Auto-generated method stub
-		mRecorder = new MediaRecorder();
+		
 		mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 		mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		mRecorder.setOutputFile(FileName);
