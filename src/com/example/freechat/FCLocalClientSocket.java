@@ -39,7 +39,7 @@ public class FCLocalClientSocket {
 			@Override
 			public void run() {
 				try {
-					mClient = new Socket(FCConfigure.SERVER_ADDR,
+					mClient = new Socket(FCConfigure.SERVER_TCP_ADDR,
 							FCConfigure.SERVER_TCP_PORT);
 					mIn = mClient.getInputStream();
 					mWriter = new BufferedWriter(new OutputStreamWriter(
