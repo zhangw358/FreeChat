@@ -31,10 +31,6 @@ public class FCPictureActivity extends FCActionBarActivity {
 	 
 	 private FCFileHelper m_fileHelper;
 	 
-	 public interface onSendPictureCallback {
-		 public void onSendPictureFinish(String content);
-	 } 
-	 
 	 @Override
 	 protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);

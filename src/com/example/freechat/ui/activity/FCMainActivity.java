@@ -9,6 +9,7 @@ import com.example.freechat.ui.FCSessionFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,7 +18,7 @@ import android.widget.RadioGroup;
 
 
 public class FCMainActivity extends FCActionBarActivity {
-    
+	
 	private Fragment [] m_fragments;
     private FragmentManager m_fragmentManager;
     private FragmentTransaction m_fragmentTransaction;
@@ -101,8 +102,8 @@ public class FCMainActivity extends FCActionBarActivity {
     
     @Override
     public void onResume() {
+    	Log.v("mainActivity" , "onResume");
     	super.onResume();
-    	Log.v("main activity", "resume!");
-    	((FCSessionFragment) m_fragments[1]).reloadData();
+    	((FCSessionFragment)m_fragments[1]).reloadData();
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.freechat.R;
 import com.example.freechat.ui.activity.FCChatActivity;
+import com.example.freechat.ui.activity.FCMainActivity;
 
 import android.app.Activity;
 import android.os.Bundle;

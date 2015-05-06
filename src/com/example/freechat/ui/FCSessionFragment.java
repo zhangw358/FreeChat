@@ -6,6 +6,7 @@ import java.util.List;
 import com.example.freechat.R;
 import com.example.freechat.storage.DatabaseHandler;
 import com.example.freechat.ui.activity.FCChatActivity;
+import com.example.freechat.ui.activity.FCMainActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -68,7 +69,8 @@ public class FCSessionFragment extends Fragment {
     
     public void reloadData() {
     	if (m_dbHandler != null && m_sessionList !=null) {
-    		m_sessionList = m_dbHandler.selectAllSession();
+    		m_sessionList.clear();
+    		m_sessionList.addAll(m_dbHandler.selectAllSession());
     	}
 	}
 
