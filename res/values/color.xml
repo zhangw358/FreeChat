@@ -8,4 +8,6 @@
     <color name="Black">#272727</color>
     <color name="Grey">#626262</color>
     <color name="White">#c5c4c4</color>
+
+    <color name="Steelblue">#4682B4</color><!--钢兰色 --> 
 </resources>
