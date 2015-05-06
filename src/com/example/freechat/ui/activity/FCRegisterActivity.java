@@ -1,7 +1,15 @@
 package com.example.freechat.ui.activity;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import com.example.freechat.R;
-import com.example.freechat.network.FCRegisterProcess;
+import com.example.freechat.network.FCRegisterTask;
+import com.example.freechat.network.FCRegisterTask.OnRegisterFinishedCallBack;
 import com.example.freechat.ui.FCActionBarActivity;
 
 import android.os.Bundle;
@@ -12,7 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class FCRegisterActivity extends FCActionBarActivity {
+public class FCRegisterActivity extends FCActionBarActivity implements OnRegisterFinishedCallBack {
 
 	private Button m_regButton;
 
@@ -32,10 +40,19 @@ public class FCRegisterActivity extends FCActionBarActivity {
 		m_regButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Log.e("Halfish", "register Button clicked");
-				new FCRegisterProcess(FCRegisterActivity.this, "halfish",
-						"halfish", "shirehalfish@gmail.com").start();
+				startRegisterTask();
 			}
 		});
+	}
+	
+	private void startRegisterTask() {
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("action", "register"));
+		params.add(new BasicNameValuePair("username", "halfish"));
+		params.add(new BasicNameValuePair("password", "halfish"));
+		params.add(new BasicNameValuePair("mail", "shirhalfish@gmail.com"));
+		
+		new FCRegisterTask(params, this).start();
 	}
 
 	@Override
@@ -59,6 +76,11 @@ public class FCRegisterActivity extends FCActionBarActivity {
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onRegisterFinished(int returnCode) {
+		
 	}
 
 }
