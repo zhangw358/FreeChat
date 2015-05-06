@@ -41,7 +41,7 @@
         <activity android:name=".ui.activity.FCMainActivity" />
         <activity android:name=".ui.activity.FCPictureActivity" />
         <activity android:name=".ui.activity.FCAudioActivity" />
-            
+        <activity android:name=".ui.activity.FCBrowseActivity" />   
         <activity android:name=".FCTChatActivity" />
         <service android:name=".FCPushService" />
     </application>

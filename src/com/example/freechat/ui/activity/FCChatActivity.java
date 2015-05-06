@@ -154,7 +154,9 @@ public class FCChatActivity extends FCActionBarActivity {
 					break;
 				case FCMessage.TYPE_PIC:
 					//TODO: show picture alert
-					Toast.makeText(getApplicationContext(), content, Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent(FCChatActivity.this, FCBrowseActivity.class);
+					intent.putExtra("address", content);
+					startActivity(intent);
 					break;
 				case FCMessage.TYPE_AUD:
 					m_player.play(content);
