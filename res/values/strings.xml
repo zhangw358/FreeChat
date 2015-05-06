@@ -19,4 +19,7 @@
     
     <string name="sign_up">Sign Up</string>
 
+    <string name="hold_to_talk">hold to talk</string>
+    <string name="release_to_send">release to send</string>
+    <string name="text">txt</string>
 </resources>
