@@ -92,7 +92,7 @@ public class FCPictureActivity extends FCActionBarActivity {
 	    				byte [] data = compressBitmap();
 	    				Intent intent = new Intent();
 	    				String fileName = m_fileHelper.generateFileName();
-	    				//m_fileHelper.writeToFile(fileName, data);
+	    				m_fileHelper.writeToFile(fileName, data);
 	    				intent.putExtra("content", fileName);
 	    				setResult(RESULT_OK, intent);
 	    				finish();

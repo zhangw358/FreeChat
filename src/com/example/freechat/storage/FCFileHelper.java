@@ -10,12 +10,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils.TruncateAt;
 import android.widget.Toast;
 
+@SuppressLint("SimpleDateFormat")
 public class FCFileHelper {
 
 	private static final int BUFFLEN = 1024;
@@ -42,12 +43,21 @@ public class FCFileHelper {
 		Date curDate = new Date(System.currentTimeMillis());
 		return m_sdPath + formatter.format(curDate);
 	}
+	
+	public File createSDFile(String fileName) throws IOException {
+		File file = new File(fileName);
+		file.createNewFile();
+		return file;
+	}
 
 	public void writeToFile(String fileName, byte [] src) {
+		File file = null;
+		OutputStream output = null;
 		try {
-			FileOutputStream out = m_context.openFileOutput(fileName, Context.MODE_PRIVATE);
-			out.write(src);
-			out.close();
+			file = createSDFile(fileName);
+			output = new FileOutputStream(file);
+			output.write(src);
+			output.flush();
 			Toast.makeText(m_context, "save!", Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
 			e.printStackTrace();
