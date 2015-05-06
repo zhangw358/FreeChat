@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.content.Context;
+import android.os.Environment;
 import android.text.TextUtils.TruncateAt;
 import android.widget.Toast;
 
@@ -19,10 +20,12 @@ public class FCFileHelper {
 
 	private Context m_context;
 	private String m_dataPath; // /data/data/com.example.package/
-
+	private String m_sdPath;
+	
 	public FCFileHelper(Context context) {
 		m_context = context;
 		m_dataPath = m_context.getFilesDir().getPath() + "/";
+		m_sdPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 	}
 
 	public boolean isDataFileExist(String fileName) {
@@ -31,8 +34,8 @@ public class FCFileHelper {
 	}
 	
 	public String generateFileName() {
-		Long random = new Long(System.currentTimeMillis() & 99);
-		return random.toString();
+		//TODO filename;
+		return m_sdPath + "test";
 	}
 
 	public void writeToFile(String fileName, byte [] src) {

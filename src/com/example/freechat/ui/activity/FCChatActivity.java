@@ -24,6 +24,7 @@ import com.example.freechat.FCPushService;
 import com.example.freechat.R;
 import com.example.freechat.aidl.AIDLChatActivity;
 import com.example.freechat.aidl.AIDLPushService;
+import com.example.freechat.audio.FCAudioPlayer;
 import com.example.freechat.storage.DatabaseHandler;
 import com.example.freechat.ui.FCActionBarActivity;
 import com.example.freechat.ui.FCMessage;
@@ -45,6 +46,8 @@ public class FCChatActivity extends FCActionBarActivity {
     private String m_userid;
     
     private DatabaseHandler m_dbhandler;
+    
+    private FCAudioPlayer m_player;
     
     private AIDLChatActivity.Stub mCallback = new AIDLChatActivity.Stub() {
 
@@ -90,6 +93,7 @@ public class FCChatActivity extends FCActionBarActivity {
         initUI();
         initChatListFromDB();
         bindMyPushService();
+        m_player = new FCAudioPlayer(this);
     }
     
     @Override
@@ -99,6 +103,13 @@ public class FCChatActivity extends FCActionBarActivity {
     	if(requestCode == FCChatActivity.PIC_REQUEST && resultCode == RESULT_OK) {
     		String content = data.getStringExtra("content");
     		FCMessage msg = new FCMessage(content, FCMessage.SEND_MESSAGE, FCMessage.TYPE_PIC);
+    		m_messageList.add(msg);
+    		m_dbhandler.insertMessage(m_userid, msg);
+    	}
+    	
+    	if(requestCode == FCChatActivity.AUD_REQUEST && resultCode == RESULT_OK) {
+    		String content = data.getStringExtra("content");
+    		FCMessage msg = new FCMessage(content, FCMessage.SEND_MESSAGE, FCMessage.TYPE_AUD);
     		m_messageList.add(msg);
     		m_dbhandler.insertMessage(m_userid, msg);
     	}
@@ -128,7 +139,8 @@ public class FCChatActivity extends FCActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
-				
+				Intent intent = new Intent(FCChatActivity.this, FCAudioActivity.class);
+            	startActivityForResult(intent, AUD_REQUEST);
 			}
 		});
         
@@ -137,6 +149,7 @@ public class FCChatActivity extends FCActionBarActivity {
         	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         		int type = m_messageList.get(position).getMessageType();
+        		String content = m_messageList.get(position).getContent();
         		switch (type) {
 				case FCMessage.TYPE_TXT:
 					Toast.makeText(getApplicationContext(), "txt", Toast.LENGTH_SHORT).show();
@@ -145,6 +158,7 @@ public class FCChatActivity extends FCActionBarActivity {
 					//TODO: show picture alert
 					break;
 				case FCMessage.TYPE_AUD:
+					m_player.play(content);
 					//TODO: show audio alert
 					break;
 				default:

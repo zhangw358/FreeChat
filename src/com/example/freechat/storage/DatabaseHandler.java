@@ -80,6 +80,7 @@ public class DatabaseHandler {
 		
 		openDB();
 		List<FCSession> sessions = new ArrayList<FCSession>();
+		/*
 		String [] columns = new String[]{NAME};
 		Cursor cursor = database.query(true, dbHelper.getTableName(), columns, null, null, null, null, null, null, null);
 		//Cursor cursor = database.rawQuery("select * from messages", columns);
@@ -90,6 +91,7 @@ public class DatabaseHandler {
 			cursor.moveToNext();
 		}
 		cursor.close();
+		*/
 		return sessions;
 	}
 	
