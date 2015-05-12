@@ -1,13 +1,10 @@
 package com.example.freechat;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -18,8 +15,8 @@ public class FCLocalClientSocket {
 			.toString();
 	private AIDLChatActivity mCallback;
 	private Socket mClient;
-	private BufferedWriter mWriter;
-	private InputStream mIn;
+	private InputStream mInputStream;
+	private OutputStream mOutputStream;
 
 	public FCLocalClientSocket() {
 		initSocket();
@@ -31,6 +28,7 @@ public class FCLocalClientSocket {
 	}
 
 	public void setCallBack(AIDLChatActivity callback) {
+		Log.v(LOG_TAG, "set callback");
 		mCallback = callback;
 	}
 
@@ -39,11 +37,12 @@ public class FCLocalClientSocket {
 			@Override
 			public void run() {
 				try {
+					Log.v(LOG_TAG, "socket init");
+
 					mClient = new Socket(FCConfigure.SERVER_TCP_ADDR,
 							FCConfigure.SERVER_TCP_PORT);
-					mIn = mClient.getInputStream();
-					mWriter = new BufferedWriter(new OutputStreamWriter(
-							mClient.getOutputStream()));
+					mInputStream = mClient.getInputStream();
+					mOutputStream = mClient.getOutputStream();
 				} catch (UnknownHostException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -60,6 +59,8 @@ public class FCLocalClientSocket {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				Log.v(LOG_TAG, "start receive data");
+
 				doStartReceive();
 			}
 		}).start();
@@ -69,35 +70,60 @@ public class FCLocalClientSocket {
 		byte[] buffer = new byte[1024 * 4];
 		int length = 0;
 		try {
-			while (!mClient.isClosed() && !mClient.isInputShutdown()
-					&& ((length = mIn.read(buffer)) != -1)) {
-				if (length > 0) {
-					String message = new String(Arrays.copyOf(buffer, length))
-							.trim();
-					mCallback.onNewMessageReceived(message);
+			while (!mClient.isClosed() && !mClient.isInputShutdown()) {
+
+				// read 5 bytes first
+				length = mInputStream.read(buffer, 0, 5);
+				if (length == 5) {
+					char type = (char) buffer[0];
+					int dataLength = FCMessageUtil.byteToInt(buffer, 1);
+					
+					if (mInputStream.read(buffer, 0, dataLength) > 0) {
+
+						if (mCallback != null) {
+							mCallback.onNewMessageReceived(type, buffer);
+						}
+					}
 				}
+
+				Thread.sleep(200);
 			}
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-	}
+	}	
 
-	public boolean sendMessageToServer(String msg) throws IOException {
-		if (msg.equals("")) {
-			Log.e(LOG_TAG, "empty message, send failed");
-			return false;
-		}
+	public boolean sendDataToServer(char type, byte[] msg) {
 
 		if (mClient == null) {
 			Log.e(LOG_TAG, "client socket is null");
 			return false;
-
-		} else {
-			mWriter.write(msg);
-			mWriter.flush();
 		}
+
+		byte[] totalBuffer = new byte[msg.length + 5];
+
+		totalBuffer[0] = 'a';
+		byte[] lenBuffer = FCMessageUtil.intToByte(msg.length);
+
+		// copy lenBuffer to totalBuffer
+		System.arraycopy(lenBuffer, 0, totalBuffer, 1, lenBuffer.length);
+
+		// copy lenBuffer to totalBuffer
+		System.arraycopy(msg, 0, totalBuffer, 5, msg.length);
+
+		Log.v(LOG_TAG, new String(totalBuffer));
+
+		try {
+			mOutputStream.write(totalBuffer);
+			mOutputStream.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return true;
 	}
 

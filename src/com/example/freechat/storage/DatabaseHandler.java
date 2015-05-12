@@ -3,6 +3,7 @@ package com.example.freechat.storage;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.freechat.FCConfigure;
 import com.example.freechat.ui.FCMessage;
 import com.example.freechat.ui.FCSession;
 
@@ -25,6 +26,8 @@ public class DatabaseHandler {
 	static final String TYPE   = "type";
 	static final String TIME   = "timestamp";
 	static final String VALUE  = "value";
+	static final String USER  = "user";
+	
 	private DatabaseHelper dbHelper;
 	private SQLiteDatabase database;
 	
@@ -49,6 +52,8 @@ public class DatabaseHandler {
 		cv.put(ATTR, msg.getMessageAttr());
 		cv.put(TYPE, msg.getMessageType());
 		cv.put(VALUE, msg.getContent());
+		cv.put(USER, FCConfigure.myName);
+		
 		database.insert(dbHelper.getTableName(), NAME, cv);
 		
 		Log.i(TAG, "Contact added successfully.");
@@ -63,8 +68,8 @@ public class DatabaseHandler {
 		openDB();
 		List<FCMessage> messages = new ArrayList<FCMessage>();
 		String [] columns = new String[]{ATTR,TYPE, TIME, VALUE};
-		String selection = new String(NAME + "=?");
-		String [] selectionArgs = new String[]{name};
+		String selection = new String(NAME + "=?" + " AND " + USER + "=?");
+		String [] selectionArgs = new String[]{name, FCConfigure.myName};
 		Cursor cursor = database.query(dbHelper.getTableName(), columns, selection, selectionArgs, null, null, null);
 		cursor.moveToFirst();
 		while(! cursor.isAfterLast()) {
@@ -82,7 +87,9 @@ public class DatabaseHandler {
 		List<FCSession> sessions = new ArrayList<FCSession>();
 		
 		String [] columns = new String[]{NAME};
-		Cursor cursor = database.query(true, dbHelper.getTableName(), columns, null, null, null, null, null, null, null);
+		String selection = new String(USER + "=?");
+		String [] selectionArgs = new String[]{FCConfigure.myName};
+		Cursor cursor = database.query(true, dbHelper.getTableName(), columns, selection, selectionArgs, null, null, null, null, null);
 		//Cursor cursor = database.rawQuery("select * from messages", columns);
 		cursor.moveToFirst();
 		while(! cursor.isAfterLast()) {

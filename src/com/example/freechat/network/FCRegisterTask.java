@@ -4,15 +4,13 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
-import android.util.Log;
-
 import com.example.freechat.FCConfigure;
 import com.example.freechat.network.FCHttpPostResult.OnGetResultCallBack;
 
 public class FCRegisterTask implements OnGetResultCallBack {
 
 	public interface OnRegisterFinishedCallBack {
-		public void onRegisterFinished(int returnCode);
+		public void onRegisterFinished(int resultCode);
 	}
 
 	private OnRegisterFinishedCallBack m_callback;
@@ -36,8 +34,10 @@ public class FCRegisterTask implements OnGetResultCallBack {
 
 	@Override
 	public void onResult(String result) {
-		int resultCode = 110;
+		int resultCode = 0;
+		if (!result.equals("")) {
+			resultCode = Integer.parseInt(result.trim());
+		}
 		m_callback.onRegisterFinished(resultCode);
-		Log.e("Halfish register", result);
 	}
 }

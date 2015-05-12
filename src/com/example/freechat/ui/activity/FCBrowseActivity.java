@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.freechat.ui.FCActionBarActivity;
 
+
+
 public class FCBrowseActivity extends FCActionBarActivity {
 	private ImageView imageView;
 	private String picaddr;
@@ -71,4 +73,3 @@ public class FCBrowseActivity extends FCActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-

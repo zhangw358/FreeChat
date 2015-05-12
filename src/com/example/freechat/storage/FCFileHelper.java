@@ -6,14 +6,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+
+import com.example.freechat.FCConfigure;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
-import android.text.TextUtils.TruncateAt;
 import android.widget.Toast;
 
 @SuppressLint("SimpleDateFormat")
@@ -25,11 +26,13 @@ public class FCFileHelper {
 	private String m_dataPath; // /data/data/com.example.package/
 	private String m_sdPath;
 	private SimpleDateFormat formatter;
-	
+
 	public FCFileHelper(Context context) {
 		m_context = context;
-		m_dataPath = m_context.getFilesDir().getPath() + "/";
-		m_sdPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
+		m_dataPath = m_context.getFilesDir().getPath() + "/freechat/"
+				+ FCConfigure.myName + "/";
+		m_sdPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+				+ "/";
 		formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	}
 
@@ -37,20 +40,20 @@ public class FCFileHelper {
 		File file = new File(m_dataPath + fileName);
 		return file.exists();
 	}
-	
+
 	public String generateFileName() {
-		//TODO filename;
+		// TODO filename;
 		Date curDate = new Date(System.currentTimeMillis());
 		return m_sdPath + formatter.format(curDate);
 	}
-	
+
 	public File createSDFile(String fileName) throws IOException {
 		File file = new File(fileName);
 		file.createNewFile();
 		return file;
 	}
 
-	public void writeToFile(String fileName, byte [] src) {
+	public void writeToFile(String fileName, byte[] src) {
 		File file = null;
 		OutputStream output = null;
 		try {
@@ -63,14 +66,14 @@ public class FCFileHelper {
 			e.printStackTrace();
 		}
 	}
-	
-	public byte [] loadFile(String fileName) {
+
+	public byte[] loadFile(String fileName) {
 		try {
 			FileInputStream in = m_context.openFileInput(fileName);
-			ByteArrayOutputStream out = new ByteArrayOutputStream(); 
-			byte [] buffer = new byte[BUFFLEN];
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			byte[] buffer = new byte[BUFFLEN];
 			int length = -1;
-			while((length=in.read(buffer)) != -1) {
+			while ((length = in.read(buffer)) != -1) {
 				out.write(buffer, 0, length);
 			}
 			out.close();
@@ -85,7 +88,7 @@ public class FCFileHelper {
 		}
 		return null;
 	}
-	
+
 	public boolean copyFileTo(File srcFile, File destFile) throws IOException {
 		if (srcFile.isDirectory() || destFile.isDirectory())
 			return false;// 判断是否是文件

@@ -1,5 +1,5 @@
 package com.example.freechat.aidl;
 interface AIDLChatActivity {
-	void onMessageSendFinished(String message);
-	void onNewMessageReceived(String message);
+	void onMessageSendFinished(boolean flag);
+	void onNewMessageReceived(char type, inout byte[] message);
 }

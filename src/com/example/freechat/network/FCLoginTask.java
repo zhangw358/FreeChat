@@ -4,15 +4,13 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 
-import android.util.Log;
-
 import com.example.freechat.FCConfigure;
 import com.example.freechat.network.FCHttpPostResult.OnGetResultCallBack;
 
 public class FCLoginTask implements OnGetResultCallBack {
 
 	public interface OnLoginFinishedCallBack {
-		public void onLoginFinished(int returnCode);
+		public void onLoginFinished(int resultCode);
 	}
 
 	private OnLoginFinishedCallBack m_callback;
@@ -36,8 +34,10 @@ public class FCLoginTask implements OnGetResultCallBack {
 
 	@Override
 	public void onResult(String result) {
-		int resultCode = 110;
+		int resultCode = 0;
+		if (!result.equals("")) {
+			resultCode = Integer.parseInt(result.trim());
+		}
 		m_callback.onLoginFinished(resultCode);
-		Log.e("Halfish login", result);
 	}
 }

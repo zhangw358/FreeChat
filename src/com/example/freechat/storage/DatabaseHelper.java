@@ -16,7 +16,7 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 	
-	private final String TAG = "DatabaseHelper";
+	// private final String TAG = "DatabaseHelper";
 	private static final String DATABASE_NAME = "db";	
 	private static final String TABLE_NAME    = "messages";
 	private static final String COLUMN_ID     = "_id";
@@ -25,13 +25,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String COLUMN_VALUE  = "value";
 	private static final String COLUMN_ATTR   = "attribute";
 	private static final String COLUMN_TYPE   = "type";
+	private static final String COLUMN_USER   = "user";
+	
 	private static final String CREATE_TABLE  = "CREATE TABLE " + TABLE_NAME + " (" + 
 		COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
 		COLUMN_NAME + " TEXT," +
 		COLUMN_TIME + " INTEGER," +
 		COLUMN_ATTR + " INTEGER," +
 		COLUMN_TYPE + " INTEGER," +
-		COLUMN_VALUE + " TEXT" +
+		COLUMN_VALUE + " TEXT," +
+		COLUMN_USER + " TEXT" +
 		");";
 
 	public DatabaseHelper(Context context) {

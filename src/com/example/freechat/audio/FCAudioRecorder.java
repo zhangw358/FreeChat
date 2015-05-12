@@ -1,6 +1,5 @@
 package com.example.freechat.audio;
 
-import java.io.File;
 import java.io.IOException;
 
 import android.media.MediaRecorder;
@@ -20,7 +19,6 @@ public class FCAudioRecorder {
 			m_Recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 			m_Recorder.setOutputFile(FilePath);
 			m_Recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-			File file = new File(FilePath);
 			try {
 				m_Recorder.prepare();
 				m_Recorder.start();

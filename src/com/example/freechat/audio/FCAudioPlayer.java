@@ -7,7 +7,6 @@ import android.media.MediaPlayer;
 import android.widget.Toast;
 
 public class FCAudioPlayer {
-	private static final String LOG_TAG = "AudioPlayer";
 	
 	private MediaPlayer m_Player;
 	private Context m_Context;
